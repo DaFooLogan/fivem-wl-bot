@@ -25,74 +25,80 @@ client.once("ready", () => {
 });
 
 client.on("messageCreate", async (message) => {
+
   if (message.author.bot) return;
-
   if (message.channel.id !== CHANNEL_ID) return;
+  if (message.content.toLowerCase() !== "wl") return;
 
-  if (message.content.toLowerCase() === "wl") {
+  try {
 
-    try {
+    // BUTTONS (used for both messages)
+    const row = new ActionRowBuilder()
+      .addComponents(
+        new ButtonBuilder()
+          .setLabel("🔗 Join DiamondRP")
+          .setStyle(ButtonStyle.Link)
+          .setURL("https://cfx.re/join/vg9a35"),
 
-      if (message.member.roles.cache.has(ROLE_ID)) {
+        new ButtonBuilder()
+          .setLabel("📜 Server Rules")
+          .setStyle(ButtonStyle.Link)
+          .setURL("https://discord.com/channels/1479591868143763736/1479622500106244258"),
 
-  const alreadyEmbed = new EmbedBuilder()
-    .setColor(0xff0000)
-    .setTitle("Diamond Roleplay Whitelist")
-    .setThumbnail("https://r2.fivemanage.com/bb4cjGZWu2F80OWT1Z7eL/3C9DAE35-5715-490B-8DD3-B4520087B09A-Photoroom.png")
-    .setDescription(
-`You have already been whitelisted!❌
+        new ButtonBuilder()
+          .setLabel("📚 New Player Guide")
+          .setStyle(ButtonStyle.Link)
+          .setURL("https://discord.com/channels/1479591868143763736/1479621896931905608")
+      );
+
+    // CHECK IF USER ALREADY HAS ROLE
+    if (message.member.roles.cache.has(ROLE_ID)) {
+
+      const alreadyEmbed = new EmbedBuilder()
+        .setColor(0xff0000)
+        .setTitle("Diamond Roleplay Whitelist")
+        .setThumbnail("https://r2.fivemanage.com/bb4cjGZWu2F80OWT1Z7eL/3C9DAE35-5715-490B-8DD3-B4520087B09A-Photoroom.png")
+        .setDescription(
+`❌ You have already been whitelisted!
 
 You already have access to **Diamond Roleplay**.
 
 Use the buttons below to join the server or view important information.`
-    )
-    .setFooter({ text: "Diamond Roleplay" });
+        )
+        .setFooter({ text: "Diamond Roleplay" });
 
+      return message.reply({
+        embeds: [alreadyEmbed],
+        components: [row]
+      });
+    }
 
-  return message.reply({ embeds: [alreadyEmbed] });
-}
+    // GIVE ROLE
+    await message.member.roles.add(ROLE_ID);
 
-      const embed = new EmbedBuilder()
-        .setColor(0x00ff88)
-        .setTitle("Diamond Roleplay Whitelist")
-        .setThumbnail("https://r2.fivemanage.com/bb4cjGZWu2F80OWT1Z7eL/3C9DAE35-5715-490B-8DD3-B4520087B09A-Photoroom.png")
-        .setDescription(
-`You are now whitelisted✅!
+    const embed = new EmbedBuilder()
+      .setColor(0x00ff88)
+      .setTitle("Diamond Roleplay Whitelist")
+      .setThumbnail("https://r2.fivemanage.com/bb4cjGZWu2F80OWT1Z7eL/3C9DAE35-5715-490B-8DD3-B4520087B09A-Photoroom.png")
+      .setDescription(
+`✅ You are now whitelisted!
 
 Welcome to **Diamond Roleplay**.
 
 Use the buttons below to join the server and view important information.`
-        )
-        .setFooter({ text: "Diamond Roleplay" });
+      )
+      .setFooter({ text: "Diamond Roleplay" });
 
-      const row = new ActionRowBuilder()
-        .addComponents(
-          new ButtonBuilder()
-            .setLabel("🔗Join DiamondRP")
-            .setStyle(ButtonStyle.Link)
-            .setURL("https://cfx.re/join/vg9a35"),
+    await message.reply({
+      embeds: [embed],
+      components: [row]
+    });
 
-          new ButtonBuilder()
-            .setLabel("📜Server Rules")
-            .setStyle(ButtonStyle.Link)
-            .setURL("https://discord.com/channels/1479591868143763736/1479622500106244258"),
-
-          new ButtonBuilder()
-            .setLabel("📚New Player Guide")
-            .setStyle(ButtonStyle.Link)
-            .setURL("https://discord.com/channels/1479591868143763736/1479621896931905608")
-        );
-
-      await message.reply({
-        embeds: [embed],
-        components: [row]
-      });
-
-    } catch (error) {
-      console.error(error);
-      message.reply("❌ I couldn't give the role. Check permissions.");
-    }
+  } catch (error) {
+    console.error(error);
+    message.reply("❌ I couldn't give the role. Check permissions.");
   }
+
 });
 
 client.login(TOKEN);
