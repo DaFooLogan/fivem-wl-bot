@@ -65,7 +65,7 @@ client.on("messageCreate", async (message) => {
 
 You already have access to **Diamond Roleplay**.
 
-__**Use the buttons below to join the server or view important information.__**`
+__**Use the buttons below to join the server or view important information.**__`
         )
         .setFooter({ text: "Diamond Roleplay" });
 
@@ -87,7 +87,7 @@ __**Use the buttons below to join the server or view important information.__**`
 
 Welcome to **Diamond Roleplay**.
 
-__**Use the buttons below to join the server or view important information.__**`
+__**Use the buttons below to join the server or view important information.**__`
       )
       .setFooter({ text: "Diamond Roleplay" });
 
