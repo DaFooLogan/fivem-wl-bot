@@ -28,7 +28,8 @@ client.on("messageCreate", async (message)=>{
       if(!role) return message.reply("Whitelist role not found.");
 
       await message.member.roles.add(role);
-      await message.reply("✅ You are now whitelisted!");
+      await message.reply("You are now whitelisted!✅ 🔗 FiveM Connect Code:
+cfx.re/join/vg9a35  📜Server Rules: <#1479622500106244258> 📕 New Player Guide: <#1479621896931905608>");
     }catch(err){
       console.error(err);
       message.reply("❌ I couldn't give the role. Check permissions.");
