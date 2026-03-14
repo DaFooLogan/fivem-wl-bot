@@ -33,7 +33,23 @@ client.on("messageCreate", async (message) => {
 
     try {
 
-      await message.member.roles.add(ROLE_ID);
+      if (message.member.roles.cache.has(ROLE_ID)) {
+
+  const alreadyEmbed = new EmbedBuilder()
+    .setColor(0xff0000)
+    .setTitle("Diamond Roleplay Whitelist")
+    .setThumbnail("https://r2.fivemanage.com/bb4cjGZWu2F80OWT1Z7eL/3C9DAE35-5715-490B-8DD3-B4520087B09A-Photoroom.png")
+    .setDescription(
+`You have already been whitelisted!❌
+
+You already have access to **Diamond Roleplay**.
+
+Use the buttons below to join the server or view important information.`
+    )
+    .setFooter({ text: "Diamond Roleplay" });
+
+  return message.reply({ embeds: [alreadyEmbed] });
+}
 
       const embed = new EmbedBuilder()
         .setColor(0x00ff88)
