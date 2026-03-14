@@ -51,8 +51,10 @@ client.on("messageCreate", async (message) => {
           .setURL("https://discord.com/channels/1479591868143763736/1479621896931905608")
       );
 
-    // CHECK IF USER ALREADY HAS ROLE
-    if (message.member.roles.cache.has(ROLE_ID)) {
+    // MORE RELIABLE ROLE CHECK
+    const hasRole = message.member.roles.cache.some(role => role.id === ROLE_ID);
+
+    if (hasRole) {
 
       const alreadyEmbed = new EmbedBuilder()
         .setColor(0xff0000)
