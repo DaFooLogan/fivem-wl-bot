@@ -48,6 +48,25 @@ Use the buttons below to join the server or view important information.`
     )
     .setFooter({ text: "Diamond Roleplay" });
 
+        const row = new ActionRowBuilder()
+        .addComponents(
+          new ButtonBuilder()
+            .setLabel("🔗Join DiamondRP")
+            .setStyle(ButtonStyle.Link)
+            .setURL("https://cfx.re/join/vg9a35"),
+
+          new ButtonBuilder()
+            .setLabel("📜Server Rules")
+            .setStyle(ButtonStyle.Link)
+            .setURL("https://discord.com/channels/1479591868143763736/1479622500106244258"),
+
+          new ButtonBuilder()
+            .setLabel("📚New Player Guide")
+            .setStyle(ButtonStyle.Link)
+            .setURL("https://discord.com/channels/1479591868143763736/1479621896931905608")
+        );
+
+
   return message.reply({ embeds: [alreadyEmbed] });
 }
 
